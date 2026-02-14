@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine Surprise</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      overflow-x: hidden; /* ปิดการเลื่อนด้านข้าง */
+      overflow-y: auto;   /* ให้เลื่อนลงได้ตามปกติ */
+
+    }
+    h1 {
+      font-size: 50px;
+      color: red;
+      margin-top: 50px;
+      animation: pulse 5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: red;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      transition: opacity 2s ease-out;
+    }
+    button:hover {
+      background: darkred;
+    }
+    .heart {
+      position: absolute;
+      font-size: 69px;
+      animation: floatUp 7s linear forwards;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+    }
+    /* รูปและข้อความเซอร์ไพรส์ */
+    .surpriseItem {
+      display: none;
+      margin: 40px;
+      opacity: 0;
+      transition: opacity 5s ease-in;
+    }
+    .surpriseItem.show {
+      display: block;
+      opacity: 1;
+    }
+    .surpriseImage {
+      width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,0,0,0.5);
+    }
+    .surpriseText {
+      font-size: 20px;
+      color: rgb(247, 185, 231);
+      margin-top: 10px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+    p{
+      font-size: 25px;
+      color: rgb(209, 45, 168);
+      
+    }
+    #bgVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1; /* ให้อยู่ด้านหลัง */
+      object-fit: cover; /* ขยายให้เต็มจอ */
+    }
+
+  </style>
+</head>
+<table>
+<body>
+  <video autoplay muted loop id="bgVideo">
+  <source src="รูป/จ.mp4" type="video/mp4">
+  </video>
+
+  <h1>💖 Happy Valentine Day For Youuu💖</h1>
+  <p>ปุ่มสำหรับลาลิ่ว</p>
+
+  <button id="surpriseBtn" onclick="playSurprise()">เซอร์ไพรส์</button>
+
+  <audio id="song" src="PUNYARB -  FtSARAN Official Audio.mp3"></audio>
+
+  <!-- รูปและข้อความหลายชุด -->
+<table>
+    <div id="imageContainer">
+    <div class="surpriseItem">
+      <img class="surpriseImage" src="รูป/1.jpg" alt="รูปคู่ 1">
+      <p class="surpriseText">แฮปปี้วาเลนไทน์เดย์จ้าาาา💕</p>
+      <p class="surpriseText">ปีนี้เราก็ยังเกาะแข้งเกาะขากันผ่านด้วยกันไปอีกปี</p>
+    </div>
+    <div class="surpriseItem">
+      <img class="surpriseImage" src="รูป/2.jpg" alt="รูปคู่ 2">
+      <p class="surpriseText">วาเลนไทน์นี้เค้าก็ไม่มีอะไรมากมายนอกจากคำว่า "เค้ารักเธอนะ🌹"</p>
+      <p class="surpriseText">เรื่องงานที่ว่าหนักก็สู้ๆนะ รอเค้าเรียนจบก่อนอีกไม่นาน"</p>
+    </div>
+    <div class="surpriseItem">
+      <img class="surpriseImage" src="รูป/3.jpg" alt="รูปคู่ 3">
+      <p class="surpriseText">14/02/69 💖</p>
+    </div>
+  </div>
+</table>
+
+  <script>
+    let heartInterval;
+
+    function playSurprise() {
+      const song = document.getElementById("song");
+      song.currentTime = 20; // เริ่มเล่นที่วินาที 20
+      song.play();
+
+      // หยุดที่วินาที 60
+      setTimeout(() => {
+        song.pause();
+      }, (180 - 20) * 1000);
+
+      // ปุ่มค่อย ๆ หายไป
+      const btn = document.getElementById("surpriseBtn");
+      btn.style.opacity = "0";
+      setTimeout(() => {
+        btn.style.display = "none";
+      }, 3000);
+
+      // แสดงรูปและข้อความทีละชุด
+      const items = document.querySelectorAll(".surpriseItem");
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("show");
+        }, index * 4000); // หน่วงเวลาแต่ละชุด 4 วินาที
+      });
+
+      
+    }
+
+  </script>
+</body>
+</html>
