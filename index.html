@@ -143,11 +143,31 @@
           item.classList.add("show");
         }, index * 4000); // หน่วงเวลาแต่ละชุด 4 วินาที
       });
+      if (!heartInterval) {
+        heartInterval = setInterval(createHeart, 300);
+      }
+    }
 
-      
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+
+      heart.style.left = Math.random() * (window.innerWidth - 30) + "px";
+      heart.style.top = window.innerHeight - 50 + "px";
+
+      const colors = ["red", "deeppink", "hotpink", "purple"];
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 20000);
     }
 
   </script>
 </body>
 </html>
+
 
